@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    min-height: 100vh;
+    background-color: black;
+}
+
+main {
+    display: flex;
+    margin-top: 5%;
+    padding: 15px;
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+.pokemonData {
+    position: absolute;
+    font-weight: 600;
+    color: red;
+    right: 15%;
+    bottom: 76%;
+    font-size: 2vw;
+}
+
+#journalDiary {
+    width: 100%;
+    max-width: 1000px;
+}
+
+#pokemonImage {
+    position: absolute;
+    bottom: 35%;
+    left: 37%;
+    height: 33%;
+}
+
+#pokemonName {
+    text-transform: capitalize;
+}

@@ -1,0 +1,1 @@
+renderPokemon('1');
