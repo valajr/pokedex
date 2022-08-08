@@ -18,19 +18,66 @@
     </head>
     <body>
         <main>
-            <div class="pokemonImg">
-                <img src="" alt="pokemon" id="pokemonImage">
+            <div class="container">
+                <div id="col1">
+                    <div id="pokemonPrev1">
+                        <img src="" alt="pokemon" id="pokemonMiniPrev1Img">
+                        <span id="pokemonMiniPrev1Name"></span>
+                    </div>
+                    <div id="pokemonPrev2">
+                        <img src="" alt="pokemon" id="pokemonMiniPrev2Img">
+                        <span id="pokemonMiniPrev2Name"></span>
+                    </div>
+                    <div id="pokemonPrev3">
+                        <img src="" alt="pokemon" id="pokemonMiniPrev3Img">
+                        <span id="pokemonMiniPrev3Name"></span>
+                    </div>
+                    <div id="arrowUp">
+                        <button type="submit" class="btn" onclick="arrowUpEvent()">
+                            <img src="./static/img/separating_arrowup.png" alt="submit" />
+                        </button>
+                    </div>
+                    <div id="pokemonSelected">
+                        <img src="" alt="pokemon" id="pokemonMiniImg">
+                        <span id="pokemonMiniName"></span>
+                    </div>
+                    <div id="arrowDown">
+                        <button type="submit" class="btn" onclick="arrowDownEvent()">
+                            <img src="./static/img/separating_arrowdown.png" alt="submit" />
+                        </button>
+                    </div>
+                    <div id="pokemonNext1">
+                        <img src="" alt="pokemon" id="pokemonMiniNext1Img">
+                        <span id="pokemonMiniNext1Name"></span>
+                    </div>
+                    <div id="pokemonNext2">
+                        <img src="" alt="pokemon" id="pokemonMiniNext2Img">
+                        <span id="pokemonMiniNext2Name"></span>
+                    </div>
+                    <div id="pokemonNext3">
+                        <img src="" alt="pokemon" id="pokemonMiniNext3Img">
+                        <span id="pokemonMiniNext3Name"></span>
+                    </div>
+                </div>
+                <div id="col2">
+                    <div id="pokemonType">
+                        <span id="type1"></span>
+                        <span id="type2"></span>
+                    </div>
+                    <div class="pokemonImg">
+                        <img src="" alt="pokemon" id="pokemonImage">
+                    </div>
+                    <div id="pokemonEvolutions"></div>
+                </div>
+                <div id="col3">
+                    <div id="pokemonData">
+                        <span id="pokemonName"></span>
+                    </div>
+                    <div id="pokemonDescription">Description</div>
+                    <div id="pokemonSeparation"><img src="./static/img/separating_03.png" alt=""></div>
+                    <div id="pokemonMap"></div>
+                </div>
             </div>
-            <div class="pokemonData">
-                <span id="pokemonNumber"></span> - 
-                <span id="pokemonName"></span>
-            </div>
-            <div class="pokemonSelected"></div>
-            <div class="pokemonMap"></div>
-            <div class="pokemonPrev"></div>
-            <div class="pokemonNext"></div>
-            
-            <img src="./static/img/styling_boxes_names.png" alt="teste" id="journalDiary">
         </main>
     </body>
 </html>

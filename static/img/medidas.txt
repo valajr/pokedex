@@ -1,0 +1,101 @@
+tamanho: 430x90
+
+
+/**************************************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    background-color: black;
+    color: red;
+}
+
+.grid {
+    align-items: center;
+    position: relative;
+    margin: 3%;
+    min-width: 100vh;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 1.5fr 1fr 0.2fr;
+    grid-template-rows: 0.8fr repeat(10, 1fr) 0.4fr;
+    grid-template-areas: ". .         .         .           ."
+                         ". prev1     poketype  pokename    ."
+                         ". prev2     poke      description ."
+                         ". prev3     poke      description ."
+                         ". arrowup   poke      description ."
+                         ". atual     poke      separation  ."
+                         ". arrowdown poke      map         ."
+                         ". next1     poke      map         ."
+                         ". next2     poke      map         ."
+                         ". next3     evolution map         ."
+                         ". next4     evolution map         ."
+                         ". .         .         .           .";
+}
+
+#journalDiary {
+    width: 90vw;
+}
+
+#pokemonPrev1 {
+    grid-area: "prev1";
+}
+#pokemonPrev2 {
+    grid-area: "prev2";
+}
+#pokemonPrev3 {
+    grid-area: "prev3";
+}
+#arrowUp {
+    grid-area: "arrowup";
+}
+#pokemonSelected {
+    grid-area: "atual";
+}#arrowDown {
+    grid-area: "arrowdown";
+}
+#pokemonNext1 {
+    grid-area: "next1";
+}
+#pokemonNext2 {
+    grid-area: "next2";
+}
+#pokemonNext3 {
+    background-color: beige;
+    grid-area: "next3";
+}
+#pokemonNext4 {
+    grid-area: "next4";
+}
+
+#pokemonType {
+    grid-area: "poketype";
+}
+#pokemonImage {
+    image-rendering: pixelated;
+    grid-area: "poke";
+    width: 100%;
+    
+}
+#pokemonEvolution {
+    grid-area: "evolution";
+}
+
+#pokemonData {
+    font-weight: 600;
+    color: red;
+    grid-area: "pokename";
+}
+#pokemonName {
+    text-transform: capitalize;
+}
+#pokemonDescription {
+    grid-area: "description";
+}
+#pokemoMap {
+    grid-area: "map";
+}

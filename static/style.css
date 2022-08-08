@@ -1,44 +1,87 @@
 * {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
+    border: 0;
 }
 
 body {
     text-align: center;
-    min-height: 100vh;
-    background-color: black;
-}
-
-main {
-    display: flex;
-    margin-top: 5%;
-    padding: 15px;
-    position: relative;
-    flex-wrap: nowrap;
-}
-
-.pokemonData {
-    position: absolute;
-    font-weight: 600;
+    background-color: rgb(20, 20, 20);
     color: red;
-    right: 15%;
-    bottom: 76%;
-    font-size: 2vw;
+    overflow: hidden;
+}
+img {
+    height: 80%;
 }
 
-#journalDiary {
+.container {
+    align-items: center;
+    position: relative;
+    width: 90vw;
+    max-width: 1690px;
+    height: 55vw;
+    max-height: 100vh;
+    /* display: grid;
+    padding: 4% 4% 3% 4%;
+    grid-template-columns: 1fr 1.5fr 1fr; */
+    background-image: url("./img/styling_cropped_grided_final.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    padding: 4% 4% 3% 4%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.btn {
+    border: 0;
+    background: transparent;
+}
+
+.btn:hover {
+    --scale-transform: 0.95;
+    transform: scale(var(--scale-transform));
+}
+
+#col1{
+    flex-shrink: 2;
+    display: grid;
     width: 100%;
-    max-width: 1000px;
+    height: 90%;
+    border: 0;
+    grid-template-rows: repeat(9, 1fr);
+}
+
+#col2{
+    flex-grow: 2;
+    display: grid;
+    width: 100%;
+    height: 90%;
+    border: 0;
+    grid-template-rows: 1fr 6fr 2fr;
+    align-items: stretch;
 }
 
 #pokemonImage {
-    position: absolute;
-    bottom: 35%;
-    left: 37%;
-    height: 33%;
+    image-rendering: pixelated;
+    height: 90%;
 }
 
+#col3{
+    flex-shrink: 2;
+    display: grid;
+    width: 100%;
+    height: 90%;
+    grid-template-rows: 1fr 3fr 1fr 4fr;
+    align-items: stretch;
+}
+#pokemonData {
+    color: red;
+}
 #pokemonName {
     text-transform: capitalize;
 }
