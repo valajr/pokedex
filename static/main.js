@@ -5,7 +5,7 @@ const API = {
     'ENCOUNTER': "/encounters"
 };
 
-let id = 11553;
+let id = 500;
 let max_pokemon = 898;
 
 let pokemon_mini_prev_1_img = document.getElementById("pokemonMiniPrev1Img");
@@ -111,6 +111,9 @@ const renderPokemon = async (pokemon) => {
     data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
     for(let i in data) {
         pokemon_map.innerHTML += ' ' + data[i]['location_area']['name'];
+    }
+    if(pokemon_map.innerHTML === '') {
+        pokemon_map.innerHTML = "Not encounter."
     }
 
     if(id > 3) {
