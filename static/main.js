@@ -5,36 +5,36 @@ const API = {
     'ENCOUNTER': "/encounters"
 };
 
-let id = 500;
+let id = 129;
 let max_pokemon = 898;
 
-let pokemon_mini_prev_1_img = document.getElementById("pokemonMiniPrev1Img");
-let pokemon_mini_prev_1_name = document.getElementById("pokemonMiniPrev1Name");
-let pokemon_mini_prev_2_img = document.getElementById("pokemonMiniPrev2Img");
-let pokemon_mini_prev_2_name = document.getElementById("pokemonMiniPrev2Name");
-let pokemon_mini_prev_3_img = document.getElementById("pokemonMiniPrev3Img");
-let pokemon_mini_prev_3_name = document.getElementById("pokemonMiniPrev3Name");
+let pokemon_mini_prev_1_img = document.getElementById("pokemon-mini-prev-1-img");
+let pokemon_mini_prev_1_name = document.getElementById("pokemon-mini-prev-1-name");
+let pokemon_mini_prev_2_img = document.getElementById("pokemon-mini-prev-2-img");
+let pokemon_mini_prev_2_name = document.getElementById("pokemon-mini-prev-2-name");
+let pokemon_mini_prev_3_img = document.getElementById("pokemon-mini-prev-3-img");
+let pokemon_mini_prev_3_name = document.getElementById("pokemon-mini-prev-3-name");
 
-let pokemon_mini_img = document.getElementById("pokemonMiniImg");
-let pokemon_mini_name = document.getElementById("pokemonMiniName");
+let pokemon_mini_img = document.getElementById("pokemon-mini-img");
+let pokemon_mini_name = document.getElementById("pokemon-mini-name");
 
-let pokemon_mini_next_1_img = document.getElementById("pokemonMiniNext1Img");
-let pokemon_mini_next_1_name = document.getElementById("pokemonMiniNext1Name");
-let pokemon_mini_next_2_img = document.getElementById("pokemonMiniNext2Img");
-let pokemon_mini_next_2_name = document.getElementById("pokemonMiniNext2Name");
-let pokemon_mini_next_3_img = document.getElementById("pokemonMiniNext3Img");
-let pokemon_mini_next_3_name = document.getElementById("pokemonMiniNext3Name");
-
-
-let pokemon_type_1 = document.getElementById("type1");
-let pokemon_type_2 = document.getElementById("type2");
-let pokemon_img = document.getElementById("pokemonImage");
-let pokemon_evolutions = document.getElementById("pokemonEvolutions");
+let pokemon_mini_next_1_img = document.getElementById("pokemon-mini-next-1-img");
+let pokemon_mini_next_1_name = document.getElementById("pokemon-mini-next-1-name");
+let pokemon_mini_next_2_img = document.getElementById("pokemon-mini-next-2-img");
+let pokemon_mini_next_2_name = document.getElementById("pokemon-mini-next-2-name");
+let pokemon_mini_next_3_img = document.getElementById("pokemon-mini-next-3-img");
+let pokemon_mini_next_3_name = document.getElementById("pokemon-mini-next-3-name");
 
 
-let pokemon_name = document.getElementById("pokemonName");
-let pokemon_description = document.getElementById("pokemonDescription");
-let pokemon_map = document.getElementById("pokemonMap");
+let pokemon_type_1 = document.getElementById("type-1");
+let pokemon_type_2 = document.getElementById("type-2");
+let pokemon_img = document.getElementById("pokemon-image");
+let pokemon_evolutions = document.getElementById("pokemon-evolutions");
+
+
+let pokemon_name = document.getElementById("pokemon-name");
+let pokemon_description = document.getElementById("pokemon-description");
+let pokemon_map = document.getElementById("pokemon-map");
 
 const fetchPokemon = async (pokemon) => {
     const APIResponse = await fetch(pokemon);
@@ -85,7 +85,7 @@ const renderPokemon = async (pokemon) => {
         count++;
         language = data['flavor_text_entries'][count]['language']['name'];
     }
-    pokemon_description.innerHTML = data['flavor_text_entries'][count]['flavor_text'];
+    pokemon_description.innerHTML = data['flavor_text_entries'][count]['flavor_text'].replaceAll('\f', '<br>');
     let pokemon_evolution = [];
     if(data['evolution_chain']) {
             let evolution = data['evolution_chain']['url'];
