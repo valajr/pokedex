@@ -5,36 +5,22 @@ const API = {
     'ENCOUNTER': "/encounters"
 };
 
-let id = 129;
+let id = 1;
 let max_pokemon = 898;
 
-let pokemon_mini_prev_1_img = document.getElementById("pokemon-mini-prev-1-img");
-let pokemon_mini_prev_1_name = document.getElementById("pokemon-mini-prev-1-name");
-let pokemon_mini_prev_2_img = document.getElementById("pokemon-mini-prev-2-img");
-let pokemon_mini_prev_2_name = document.getElementById("pokemon-mini-prev-2-name");
-let pokemon_mini_prev_3_img = document.getElementById("pokemon-mini-prev-3-img");
-let pokemon_mini_prev_3_name = document.getElementById("pokemon-mini-prev-3-name");
+let pokemon_mini_name = document.getElementsByClassName("pokemon-mini-name");
+let pokemon_mini_img = document.getElementsByClassName("pokemon-mini-img");
+let pokemon_selected_name = document.getElementById("pokemon-selected-name");
+let pokemon_selected_img = document.getElementById("pokemon-selected-img");
 
-let pokemon_mini_img = document.getElementById("pokemon-mini-img");
-let pokemon_mini_name = document.getElementById("pokemon-mini-name");
-
-let pokemon_mini_next_1_img = document.getElementById("pokemon-mini-next-1-img");
-let pokemon_mini_next_1_name = document.getElementById("pokemon-mini-next-1-name");
-let pokemon_mini_next_2_img = document.getElementById("pokemon-mini-next-2-img");
-let pokemon_mini_next_2_name = document.getElementById("pokemon-mini-next-2-name");
-let pokemon_mini_next_3_img = document.getElementById("pokemon-mini-next-3-img");
-let pokemon_mini_next_3_name = document.getElementById("pokemon-mini-next-3-name");
-
-
-let pokemon_type_1 = document.getElementById("type-1");
-let pokemon_type_2 = document.getElementById("type-2");
+let pokemon_type = document.getElementsByClassName("type");
 let pokemon_img = document.getElementById("pokemon-image");
 let pokemon_evolutions = document.getElementById("pokemon-evolutions");
 
 
 let pokemon_name = document.getElementById("pokemon-name");
 let pokemon_description = document.getElementById("pokemon-description");
-let pokemon_map = document.getElementById("pokemon-map");
+let pokemon_maps = document.getElementById("pokemon-map");
 
 const fetchPokemon = async (pokemon) => {
     const APIResponse = await fetch(pokemon);
@@ -47,13 +33,34 @@ const fetchPokemon = async (pokemon) => {
 //     return (data['results'].length); // return data.count;
 // }
 
-function getPokemonData(data) {
+function getPokemonDataAnimated(data) {
     let poke = `${data.id} - ${data.name}`;
     let img_src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
     if(!img_src) {
         img_src = data['sprites']['versions']['generation-v']['black-white']['front_default'];
     }
     return [poke, img_src];
+}
+
+function getPokemonData(data) {
+    let poke = `${data.id} - ${data.name}`;
+    let img_src = data['sprites']['versions']['generation-v']['black-white']['front_default'];
+    return [poke, img_src];
+}
+
+function showMap(id) {
+    console.log(id);
+}
+
+function createButton(map) {
+    let button = document.createElement("button");
+    button.setAttribute("id", map);
+    button.setAttribute("class", "btn-map");
+    button.addEventListener("click", () => {
+        this.showMap(map);
+    });
+    button.innerHTML = map;
+    return button;
 }
 
 const renderPokemon = async (pokemon) => {
@@ -64,16 +71,18 @@ const renderPokemon = async (pokemon) => {
     if(pokemon > max_pokemon) {
         pokemon = max_pokemon;
     }
-
+    
+    pokemon_type[0].innerHTML = '';
+    pokemon_type[1].innerHTML = '';
     let data = await fetchPokemon(API.POKEMON + pokemon);
     let name_pokemon = data.name;
     id = data.id;
-    let [poke, img_src] = getPokemonData(data);
-    pokemon_mini_name.innerHTML = poke;
-    pokemon_mini_img.src = img_src;
-    pokemon_type_1.innerHTML = data['types'][0]['type']['name'];
+    let [poke, img_src] = getPokemonDataAnimated(data);
+    pokemon_selected_name.innerHTML = poke;
+    pokemon_selected_img.src = img_src;
+    pokemon_type[0].innerHTML = data['types'][0]['type']['name'];
     if(data['types'].length > 1) {
-        pokemon_type_2.innerHTML = data['types'][1]['type']['name'];
+        pokemon_type[1].innerHTML = data['types'][1]['type']['name'];
     }
     pokemon_img.src = img_src;
     pokemon_name.innerHTML = poke;
@@ -87,6 +96,7 @@ const renderPokemon = async (pokemon) => {
     }
     pokemon_description.innerHTML = data['flavor_text_entries'][count]['flavor_text'].replaceAll('\f', '<br>');
     let pokemon_evolution = [];
+    pokemon_evolutions.innerHTML = '';
     if(data['evolution_chain']) {
             let evolution = data['evolution_chain']['url'];
         data = await fetchPokemon(evolution);
@@ -105,87 +115,96 @@ const renderPokemon = async (pokemon) => {
             }
         }
     }
-    pokemon_evolutions.innerHTML = pokemon_evolution;
-
-    pokemon_map.innerHTML = '';
-    data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
-    for(let i in data) {
-        pokemon_map.innerHTML += ' ' + data[i]['location_area']['name'];
+    if(!pokemon_evolution[0]) {
+        pokemon_evolutions.innerHTML = "Not evolued."
     }
-    if(pokemon_map.innerHTML === '') {
-        pokemon_map.innerHTML = "Not encounter."
+    else {
+        pokemon_evolutions.innerHTML = pokemon_evolution;
+    }
+
+    let pokemon_map = document.createElement("table");
+    pokemon_map.setAttribute("class", "table-map");
+    pokemon_maps.innerHTML = "Not encounter.";
+    data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
+    if (data[0]['location_area']['name']) {
+        pokemon_maps.innerHTML = '';
+        for(let i in data) {
+            map = data[i]['location_area']['name'];
+            pokemon_map.appendChild(createButton(map));
+        }
+        pokemon_maps.appendChild(pokemon_map);
     }
 
     if(id > 3) {
-        pokemon_mini_prev_1_img.removeAttribute('hidden');
+        pokemon_mini_img[0].removeAttribute('hidden');
         data = await fetchPokemon(API.POKEMON + (pokemon - 3));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_prev_1_name.innerHTML = poke;
-        pokemon_mini_prev_1_img.src = img_src;
+        pokemon_mini_name[0].innerHTML = poke;
+        pokemon_mini_img[0].src = img_src;
     }
     else {
-        pokemon_mini_prev_1_img.setAttribute('hidden', true);
-        pokemon_mini_prev_1_name.innerHTML = '';
+        pokemon_mini_img[0].setAttribute('hidden', true);
+        pokemon_mini_name[0].innerHTML = '';
     }
     if(id > 2) {
-        pokemon_mini_prev_2_img.removeAttribute('hidden');
+        pokemon_mini_img[1].removeAttribute('hidden');
         data = await fetchPokemon(API.POKEMON + (pokemon - 2));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_prev_2_name.innerHTML = poke;
-        pokemon_mini_prev_2_img.src = img_src;
+        pokemon_mini_name[1].innerHTML = poke;
+        pokemon_mini_img[1].src = img_src;
     }
     else {
-        pokemon_mini_prev_2_img.setAttribute('hidden', true);
-        pokemon_mini_prev_2_name.innerHTML = '';
+        pokemon_mini_img[1].setAttribute('hidden', true);
+        pokemon_mini_name[1].innerHTML = '';
     }
 
     if(id > 1) {
-        pokemon_mini_prev_3_img.removeAttribute('hidden');
+        pokemon_mini_img[2].removeAttribute('hidden');
         data = await fetchPokemon(API.POKEMON + (pokemon - 1));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_prev_3_name.innerHTML = poke;
-        pokemon_mini_prev_3_img.src = img_src;
+        pokemon_mini_name[2].innerHTML = poke;
+        pokemon_mini_img[2].src = img_src;
     }
     else {
-        pokemon_mini_prev_3_img.setAttribute('hidden', true);
-        pokemon_mini_prev_3_name.innerHTML = '';
+        pokemon_mini_img[2].setAttribute('hidden', true);
+        pokemon_mini_name[2].innerHTML = '';
     }
 
 
     if(id < max_pokemon) {
-        pokemon_mini_next_1_img.removeAttribute('hidden', true);
+        pokemon_mini_img[3].removeAttribute('hidden', true);
         data = await fetchPokemon(API.POKEMON + (pokemon + 1));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_next_1_name.innerHTML = poke;
-        pokemon_mini_next_1_img.src = img_src;
+        pokemon_mini_name[3].innerHTML = poke;
+        pokemon_mini_img[3].src = img_src;
     }
     else {
-        pokemon_mini_next_1_img.setAttribute('hidden', true);
-        pokemon_mini_next_1_name.innerHTML = '';
+        pokemon_mini_img[3].setAttribute('hidden', true);
+        pokemon_mini_name[3].innerHTML = '';
     }
 
     if(id < max_pokemon - 1) {
-        pokemon_mini_next_2_img.removeAttribute('hidden', true);
+        pokemon_mini_img[4].removeAttribute('hidden', true);
         data = await fetchPokemon(API.POKEMON + (pokemon + 2));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_next_2_name.innerHTML = poke;
-        pokemon_mini_next_2_img.src = img_src;
+        pokemon_mini_name[4].innerHTML = poke;
+        pokemon_mini_img[4].src = img_src;
     }
     else {
-        pokemon_mini_next_2_img.setAttribute('hidden', true);
-        pokemon_mini_next_2_name.innerHTML = '';
+        pokemon_mini_img[4].setAttribute('hidden', true);
+        pokemon_mini_name[4].innerHTML = '';
     }
 
     if(id < max_pokemon - 2) {
-        pokemon_mini_next_3_img.removeAttribute('hidden', true);
+        pokemon_mini_img[5].removeAttribute('hidden', true);
         data = await fetchPokemon(API.POKEMON + (pokemon + 3));
         [poke, img_src] = getPokemonData(data);
-        pokemon_mini_next_3_name.innerHTML = poke;
-        pokemon_mini_next_3_img.src = img_src;
+        pokemon_mini_name[5].innerHTML = poke;
+        pokemon_mini_img[5].src = img_src;
     }
     else {
-        pokemon_mini_next_3_img.setAttribute('hidden', true);
-        pokemon_mini_next_3_name.innerHTML = '';
+        pokemon_mini_img[5].setAttribute('hidden', true);
+        pokemon_mini_name[5].innerHTML = '';
     }
 }
 

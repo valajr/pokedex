@@ -12,6 +12,11 @@ body {
     overflow: hidden;
 }
 
+table {
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+
 .container {
     text-align: center;
     position: relative;
@@ -31,13 +36,25 @@ body {
     align-items: flex-start;
 }
 
-.btn {
+.btn-pokemon {
     border: 0;
     background: transparent;
     transition: transform 80ms ease;
 }
 
-.btn:hover {
+.btn-pokemon:hover {
+    --scale-transform: 0.95;
+    transform: scale(var(--scale-transform));
+}
+
+.btn-map {
+    border: 0;
+    background: transparent;
+    padding: 5px;
+    transition: transform 80ms ease;
+}
+
+.btn-map:hover {
     --scale-transform: 0.95;
     transform: scale(var(--scale-transform));
 }
