@@ -51,13 +51,12 @@ function getPokemonData(data) {
 function hideMap() {
     let map_popup = document.getElementById("map-popup");
     map_popup.innerHTML = '';
-    map_popup.setAttribute('hidden', true);
 }
 
 function showMap(map) {
     document.getElementById("map-popup").removeAttribute('hidden');
     document.getElementById("map-popup").innerHTML = `<img src="./import/toolbox/maps/${map}-2.png" alt="${map}" onclick="hideMap()" />`;
-    setTimeout(hideSkillTree, 5000);
+    setTimeout(hideMap, 5000);
 }
 
 function showMiniMap(map) {
@@ -138,7 +137,7 @@ const renderPokemon = async (pokemon) => {
     pokemon_map.setAttribute("class", "table-map");
     pokemon_maps.innerHTML = "Not encounter.";
     data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
-    if (data[0]['location_area']['name']) {
+    if (data.length && data[0]['location_area']['name']) {
         pokemon_maps.innerHTML = '';
         for(let i in data) {
             map = data[i]['location_area']['name'];
