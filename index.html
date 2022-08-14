@@ -4,14 +4,6 @@
         <meta charset="UTF-8">
         <title>Pokedex</title>
                 
-        <!-- Bestiary -->
-        <link rel="stylesheet" href="import/bestiary/style.css">
-        <script defer src="import/bestiary/main.js"></script>
-
-        <!-- Pokemon -->
-        <link rel="stylesheet" href="import/pokemon/style.css">
-        <script defer src="import/pokemon/main.js"></script>
-
         <link rel="stylesheet" href="static/style.css">
         <script defer src="static/main.js"></script>
         <link rel="icon" href="static/img/favicon.png">
@@ -40,7 +32,7 @@
                     </div>
                     <div id="arrow-up">
                         <button type="submit" class="btn-pokemon" onclick="arrowUpEvent()">
-                            <img src="./static/img/separating_arrowup_novo.png" alt="submit" />
+                            <img src="./static/img/separating_arrowup_novo.png" alt="arrow-up" />
                         </button>
                     </div>
                     <div id="pokemon-selected" class="pokemon-mini">
@@ -51,7 +43,7 @@
                     </div>
                     <div id="arrow-down">
                         <button type="submit" class="btn-pokemon" onclick="arrowDownEvent()">
-                            <img src="./static/img/separating_arrowdown_novo.png" alt="submit" />
+                            <img src="./static/img/separating_arrowdown_novo.png" alt="arrow-down" />
                         </button>
                     </div>
                     <div id="pokemon-next-1" class="pokemon-mini">
@@ -92,6 +84,7 @@
                     <div id="pokemon-map"></div>
                 </div>
             </div>
+            <div id="map-popup" hidden></div>
         </main>
     </body>
 </html>

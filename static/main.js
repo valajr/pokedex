@@ -48,8 +48,20 @@ function getPokemonData(data) {
     return [poke, img_src];
 }
 
-function showMap(id) {
-    console.log(id);
+function hideMap() {
+    let map_popup = document.getElementById("map-popup");
+    map_popup.innerHTML = '';
+    map_popup.setAttribute('hidden', true);
+}
+
+function showMap(map) {
+    document.getElementById("map-popup").removeAttribute('hidden');
+    document.getElementById("map-popup").innerHTML = `<img src="./import/toolbox/maps/${map}-2.png" alt="${map}" onclick="hideMap()" />`;
+    setTimeout(hideSkillTree, 5000);
+}
+
+function showMiniMap(map) {
+    pokemon_maps.innerHTML = `<img src="./import/toolbox/maps/${map}-1.png" alt="${map}" onclick="showMap('${map}')" />`;
 }
 
 function createButton(map) {
@@ -57,7 +69,7 @@ function createButton(map) {
     button.setAttribute("id", map);
     button.setAttribute("class", "btn-map");
     button.addEventListener("click", () => {
-        this.showMap(map);
+        this.showMiniMap(map);
     });
     button.innerHTML = map;
     return button;
@@ -130,6 +142,7 @@ const renderPokemon = async (pokemon) => {
         pokemon_maps.innerHTML = '';
         for(let i in data) {
             map = data[i]['location_area']['name'];
+            map = map.replace("-area", '');
             pokemon_map.appendChild(createButton(map));
         }
         pokemon_maps.appendChild(pokemon_map);
