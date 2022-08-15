@@ -10,17 +10,17 @@ let max_pokemon = 898;
 
 let pokemon_mini_name = document.getElementsByClassName("pokemon-mini-name");
 let pokemon_mini_img = document.getElementsByClassName("pokemon-mini-img");
-let pokemon_selected_name = document.getElementById("pokemon-selected-name");
-let pokemon_selected_img = document.getElementById("pokemon-selected-img");
+let pokemon_selected_name = document.getElementById("pokemonSelectedName");
+let pokemon_selected_img = document.getElementById("pokemonSelectedImg");
 
 let pokemon_type = document.getElementsByClassName("type");
-let pokemon_img = document.getElementById("pokemon-image");
-let pokemon_evolutions = document.getElementById("pokemon-evolutions");
+let pokemon_img = document.getElementById("pokemonImage");
+let pokemon_evolutions = document.getElementById("pokemonEvolutions");
 
 
-let pokemon_name = document.getElementById("pokemon-name");
-let pokemon_description = document.getElementById("pokemon-description");
-let pokemon_maps = document.getElementById("pokemon-map");
+let pokemon_name = document.getElementById("pokemonName");
+let pokemon_description = document.getElementById("pokemonDescription");
+let pokemon_maps = document.getElementById("pokemonMap");
 
 const fetchPokemon = async (pokemon) => {
     const APIResponse = await fetch(pokemon);
@@ -49,13 +49,14 @@ function getPokemonData(data) {
 }
 
 function hideMap() {
-    let map_popup = document.getElementById("map-popup");
+    let map_popup = document.getElementById("mapPopup");
     map_popup.innerHTML = '';
+    map_popup.setAttribute("hidden", true);
 }
 
 function showMap(map) {
-    document.getElementById("map-popup").removeAttribute('hidden');
-    document.getElementById("map-popup").innerHTML = `<img src="./import/toolbox/maps/${map}-2.png" alt="${map}" onclick="hideMap()" />`;
+    document.getElementById("mapPopup").removeAttribute('hidden');
+    document.getElementById("mapPopup").innerHTML = `<img src="./import/toolbox/maps/${map}-2.png" alt="${map}" onclick="hideMap()" />`;
     setTimeout(hideMap, 5000);
 }
 
@@ -91,9 +92,15 @@ const renderPokemon = async (pokemon) => {
     let [poke, img_src] = getPokemonDataAnimated(data);
     pokemon_selected_name.innerHTML = poke;
     pokemon_selected_img.src = img_src;
-    pokemon_type[0].innerHTML = data['types'][0]['type']['name'];
+    let type = data['types'][0]['type']['name'];
+    pokemon_type[0].innerHTML = type;
+    pokemon_type[0].setAttribute("class", "type");
+    pokemon_type[0].classList.add(`type-${type}`);
     if(data['types'].length > 1) {
-        pokemon_type[1].innerHTML = data['types'][1]['type']['name'];
+        type = data['types'][1]['type']['name'];
+        pokemon_type[1].innerHTML = type;
+        pokemon_type[1].setAttribute("class", "type");
+        pokemon_type[1].classList.add(`type-${type}`);
     }
     pokemon_img.src = img_src;
     pokemon_name.innerHTML = poke;
