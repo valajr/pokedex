@@ -113,6 +113,7 @@ const renderPokemon = async (pokemon) => {
 
         let local = pokemon_data['local'];
         if (local) {
+            pokemon_maps.innerHTML = '';
             let pokemon_map = document.createElement("table");
             
             for(let i in local) {
@@ -182,7 +183,7 @@ const renderPokemon = async (pokemon) => {
         let pokemon_map = document.createElement("table");
         let pokemon_local = [];
         data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
-        if (data.length && data[0]['location_area']['name']) {
+        if (data) {
             pokemon_maps.innerHTML = '';
             for(let i in data) {
                 map = data[i]['location_area']['name'];
