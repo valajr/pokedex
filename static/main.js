@@ -8,6 +8,11 @@ const API = {
 let id = 1;
 let max_pokemon = 898;
 
+let container = document.getElementById("container");
+let col_1 = document.getElementById("col1");
+let col_2 = document.getElementById("col2");
+let col_3 = document.getElementById("col3");
+
 let pokemon_mini_name = document.getElementsByClassName("pokemon-mini-name");
 let pokemon_mini_img = document.getElementsByClassName("pokemon-mini-img");
 let pokemon_selected_name = document.getElementById("pokemonSelectedName");
@@ -84,9 +89,7 @@ const renderPokemon = async (pokemon) => {
     pokemon_type[0].setAttribute("class", "type");
     pokemon_type[1].innerHTML = '';
     pokemon_type[1].setAttribute("class", "type");
-    pokemon_evolutions.innerHTML = '';
     pokemon_evolutions.innerHTML = "Not evolued.";
-    pokemon_maps.innerHTML = '';
     pokemon_maps.innerHTML = "Not encounter.";
 
     let pokemon_data = JSON.parse(localStorage.getItem(pokemon));
@@ -121,6 +124,14 @@ const renderPokemon = async (pokemon) => {
             }
             pokemon_maps.appendChild(pokemon_map);
         }
+
+        let habitat = pokemon_data['habitat'];
+        let bg_color = pokemon_data['bg-color'];
+        pokemon_img.setAttribute("class", `habitat-${habitat}`);
+        container.setAttribute("class", `color-${bg_color}`);
+        col_1.setAttribute("class", `color-${bg_color}`);
+        col_2.setAttribute("class", `color-${bg_color}`);
+        col_3.setAttribute("class", `color-${bg_color}`);
     }
     else {
         let data = await fetchPokemon(API.POKEMON + pokemon);
@@ -154,6 +165,14 @@ const renderPokemon = async (pokemon) => {
         let description = data['flavor_text_entries'][count]['flavor_text'].replaceAll('\f', '<br>');
         pokemon_description.innerHTML = description;
 
+        let habitat = data['habitat']['name'];
+        pokemon_img.setAttribute("class", `habitat-${habitat}`);
+        let bg_color = data['color']['name'];
+        container.setAttribute("class", `color-${bg_color}`);
+        col_1.setAttribute("class", `color-${bg_color}`);
+        col_2.setAttribute("class", `color-${bg_color}`);
+        col_3.setAttribute("class", `color-${bg_color}`);
+
         let pokemon_evolution = [];
         if(data['evolution_chain']) {
                 let evolution = data['evolution_chain']['url'];
@@ -183,7 +202,7 @@ const renderPokemon = async (pokemon) => {
         let pokemon_map = document.createElement("table");
         let pokemon_local = [];
         data = await fetchPokemon(API.POKEMON + pokemon + API.ENCOUNTER);
-        if (data) {
+        if (data.length) {
             pokemon_maps.innerHTML = '';
             for(let i in data) {
                 map = data[i]['location_area']['name'];
@@ -194,7 +213,7 @@ const renderPokemon = async (pokemon) => {
             pokemon_maps.appendChild(pokemon_map);
         }
         else {
-            pokemon_map = null;
+            pokemon_local = null;
         }
 
         pokemon_data = {
@@ -205,7 +224,9 @@ const renderPokemon = async (pokemon) => {
             'img': img_src,
             'description': description,
             'evolutions': pokemon_evolution,
-            'local': pokemon_local
+            'local': pokemon_local,
+            'habitat': habitat,
+            'bg-color': bg_color
         };
         localStorage.setItem(pokemon, JSON.stringify(pokemon_data));
     }

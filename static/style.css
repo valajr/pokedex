@@ -8,33 +8,48 @@
 body {
     text-align: center;
     background-color: rgb(20, 20, 20);
-    color: red;
     overflow: hidden;
 }
 
-table {
-    border-spacing: 20px;
-    border-collapse: separate;
+.color-black{
+    --background-color: black;
+    --text-color: white;
 }
-
-.container {
-    text-align: center;
-    position: relative;
-    width: 90vw;
-    max-width: 1690px;
-    height: 50vw;
-    max-height: 1000px;
-    background-image: url("./img/styling_cropped_grided_final.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: flex;
-    padding: 4% 4% 3% 4%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: stretch;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-transform: capitalize;
+.color-blue{
+    --background-color: blue;
+    --text-color: white;
+}
+.color-brown{
+    --background-color: brown;
+    --text-color: white;
+}
+.color-gray{
+    --background-color: gray;
+    --text-color: white;
+}
+.color-green{
+    --background-color: green;
+    --text-color: white;
+}
+.color-pink{
+    --background-color: pink;
+    --text-color: black;
+}
+.color-purple{
+    --background-color: purple;
+    --text-color: white;
+}
+.color-red{
+    --background-color: red;
+    --text-color: white;
+}
+.color-white{
+    --background-color: white;
+    --text-color: black;
+}
+.color-yellow{
+    --background-color: yellow;
+    --text-color: black;
 }
 
 .container > div {
@@ -58,6 +73,7 @@ table {
     padding: 5px;
     transition: transform 80ms ease;
     text-transform: capitalize;
+    color: var(--text-color);
 }
 
 .btn-map:hover {
@@ -70,7 +86,7 @@ table {
     background-color: var(--type-background-color);
     border-radius: 20px; 
     color: white;
-    width: 60px;
+    width: 70px;
     height: 50%;
     align-content: flex-start;
     align-items: center;
@@ -167,8 +183,13 @@ table {
     border: 1px solid #682A68;
 }
 
-.type-question {
+.type-unkown {
     --type-background-color: #68A090;
+    border: 1px solid #682A68;
+}
+
+.type-shadow {
+    --type-background-color: #443d37;
     border: 1px solid #682A68;
 }
 
@@ -196,6 +217,55 @@ table {
     width: auto;
 }
 
+.habitat-cave{
+    --img-background: url("./img/habitat-cave.png")
+}
+.habitat-forest{
+    --img-background: url("./img/habitat-forest.png")
+}
+.habitat-grassland{
+    --img-background: url("./img/habitat-grassland.png")
+}
+.habitat-mountain{
+    --img-background: url("./img/habitat-mountain.png")
+}
+.habitat-rare{
+    --img-background: url("./img/habitat-rare.png")
+}
+.habitat-rough-terrain{
+    --img-background: url("./img/habitat-rough-terrain.png")
+}
+.habitat-sea{
+    --img-background: url("./img/habitat-sea.png")
+}
+.habitat-urban{
+    --img-background: url("./img/habitat-urban.png")
+}
+.habitat-waters-edge{
+    --img-background: url("./img/habitat-waters-edge.png")
+}
+
+#container {
+    text-align: center;
+    position: relative;
+    width: 90vw;
+    max-width: 1690px;
+    height: 50vw;
+    max-height: 1000px;
+    background-image: url("./img/styling.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    padding: 4% 4% 3% 4%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-transform: capitalize;
+    background-color: var(--background-color);
+}
+
 #col1{
     display: flex;
     width: 21vw;
@@ -206,6 +276,7 @@ table {
     flex-wrap: wrap;
     text-align: center;
     align-items: stretch;
+    color: var(--text-color);
 }
 
 #col2{
@@ -216,6 +287,7 @@ table {
     grid-template-rows: 1fr 6fr 2fr;
     align-items: stretch;
     justify-content: space-around;
+    color: var(--text-color);
 }
 
 #pokemonType {
@@ -228,6 +300,7 @@ table {
     image-rendering: pixelated;
     height: 60%;
     width: auto;
+    background-image: var(--img-background);
 }
 
 #col3{
@@ -238,7 +311,7 @@ table {
     align-items: stretch;
     justify-items: start;
     justify-content: center;
-
+    color: var(--text-color);
 }
 
 #pokemonDescription {
@@ -247,6 +320,7 @@ table {
 
 #col3 > div:last-child {
     overflow-y: auto;
+    border: 30px;
 }
 
 #mapPopup {
