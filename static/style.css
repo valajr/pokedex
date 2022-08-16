@@ -74,6 +74,7 @@ body {
     transition: transform 80ms ease;
     text-transform: capitalize;
     color: var(--text-color);
+    font-size: 75%;
 }
 
 .btn-map:hover {
@@ -268,7 +269,7 @@ body {
 
 #col1{
     display: flex;
-    width: 21vw;
+    width: 15vw;
     height: 90%;
     border: 0;
     flex-direction: row;
@@ -277,17 +278,19 @@ body {
     text-align: center;
     align-items: stretch;
     color: var(--text-color);
+    font-size: 75%;
 }
 
 #col2{
     display: grid;
-    width: 30vw;
+    width: 34vw;
     height: 90%;
     border: 0;
     grid-template-rows: 1fr 6fr 2fr;
     align-items: stretch;
     justify-content: space-around;
     color: var(--text-color);
+    font-size: 75%;
 }
 
 #pokemonType {
@@ -305,22 +308,34 @@ body {
 
 #col3{
     display: grid;
-    width: 17vw;
+    width: 19vw;
     height: 90%;
     grid-template-rows: 1fr 3fr 1fr 4fr;
-    align-items: stretch;
+    align-items: center;
     justify-items: start;
     justify-content: center;
     color: var(--text-color);
+    font-size: 75%;
+}
+
+#pokemonData {
+    display: flex;
+    align-items: center;
 }
 
 #pokemonDescription {
     text-transform: none;
+    width: 100%;
 }
 
 #col3 > div:last-child {
-    overflow-y: auto;
     border: 30px;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    overflow-y: auto;
 }
 
 #mapPopup {
